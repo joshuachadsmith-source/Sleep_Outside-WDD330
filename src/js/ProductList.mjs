@@ -24,7 +24,7 @@ function productCardTemplate(product) {
           <li class="product-card">`
 };
 
-renderList(list) {
+function renderList(list) {
     const htmlStrings = list.map(productCardTemplate);
     this.listElement.innerHTML('afterbegin', htmlStrings.join(''));
 }
