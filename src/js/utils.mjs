@@ -29,11 +29,34 @@ export function getParam(param) {
 
 }
 
+// main function for rendering the list of cards
 export function renderListWithTemplate(templateFn, parentElement, list, position = 'afterbegin', clear = false) {
   const htmlStrings = list.map(templateFn);
   if (clear) {parentElement.innerHTML = '';
 }
 parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
+}
 
+// this is for header and footer
+export function renderWithTemplate(template, parentElement, data, callback) {
+  const html = template;
+  parentElement.innerHTML = html;
+  if (callback) {
+    callback(data);
+  }
+}
 
+async function loadTemplate(path) {
+  const response = await fetch(path);
+  const template = await response.text();
+  return template;
+}
+
+export async function loadHeaderFooter() {
+  const headerTemplate = await loadTemplate('/partials/header.html');
+  const headerElement = document.getElementById('main-header');
+  const footerTemplate = await loadTemplate('/partials/footer.html');
+  const footerElement = document.getElementById('main-footer');
+  renderWithTemplate(headerTemplate, headerElement);
+  renderWithTemplate(footerTemplate, footerElement);
 }
