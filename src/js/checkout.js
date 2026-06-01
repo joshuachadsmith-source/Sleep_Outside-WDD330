@@ -1,4 +1,4 @@
-import CheckoutProcess from "./CheckoutProcess.mjs";
+import CheckoutProcess from "./CheckOutProcess.mjs";
 
 const myCheckout = new CheckoutProcess("so-cart", ".order-summary");
 myCheckout.init();
