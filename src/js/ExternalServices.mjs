@@ -1,4 +1,4 @@
-const baseURL = import.meta.env.VITE_SERVER_URL;
+const baseURL = import.meta.env.VITE_SERVER_URL || "https://wdd330-backend.onrender.com/";
 
 export default class ExternalServices {
   constructor() {}
@@ -36,7 +36,8 @@ export default class ExternalServices {
     if (response.ok) {
       return await response.json();
     } else {
-      throw new Error("Bad Response");
+      const jsonResponse = await response.json();
+      throw { name: "servicesError", message: jsonResponse };
     }
   }
 }
